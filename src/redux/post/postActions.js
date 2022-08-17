@@ -3,6 +3,8 @@ import {
   FETCH_POSTS_REQUEST,
   FETCH_POSTS_SUCCESS,
   FETCH_POSTS_FAILURE,
+  DELETE_POSTS_SUCCESS,
+  DELETE_POSTS_REQUEST,
 } from "./postTypes";
 
 export const fetchPostsRequest = () => {
@@ -37,6 +39,34 @@ export const fetchPosts = () => {
       .catch(error => {
         const errorMsg = error.message;
         dispatch(fetchPostsFailure(errorMsg));
+      });
+  };
+};
+
+export const deletePostRequest = () => {
+  return {
+    type: DELETE_POSTS_REQUEST,
+  };
+};
+
+export const deletePostSuccess = id => {
+  return {
+    type: DELETE_POSTS_SUCCESS,
+    payload: id,
+  };
+};
+
+export const deletePost = id => {
+  return dispatch => {
+    dispatch(deletePostRequest());
+    axios
+      .delete(`https://jsonplaceholder.typicode.com/posts/${id}`)
+      .then(response => {
+        dispatch(deletePostSuccess(id));
+        console.log(response);
+      })
+      .catch(error => {
+        console.log(error);
       });
   };
 };

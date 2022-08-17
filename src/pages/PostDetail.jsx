@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { connect } from "react-redux";
-import { fetchComments } from "../redux";
+import { fetchComments, deletePost } from "../redux";
 import { BsFillTrashFill, BsPencilFill } from "react-icons/bs";
 // Components
 import Comment from "../components/Comment";
@@ -10,7 +10,7 @@ import PostDetailHeader from "../components/PostDetailHeader";
 import Loading from "../components/Loading";
 import Error from "../components/Error";
 
-const PostDetail = ({ postsData, commentsData, fetchComments }) => {
+const PostDetail = ({ postsData, commentsData, fetchComments, deletePost }) => {
   const { id } = useParams();
 
   useEffect(() => {
@@ -34,7 +34,10 @@ const PostDetail = ({ postsData, commentsData, fetchComments }) => {
           })
         )}
         <div className="flex justify-end gap-5">
-          <button className="flex items-center gap-1 bg-pink-600 text-white text-sm px-3 py-2 rounded-md">
+          <button
+            className="flex items-center gap-1 bg-pink-600 text-white text-sm px-3 py-2 rounded-md"
+            onClick={id => deletePost(id)}
+          >
             <BsFillTrashFill /> Delete
           </button>
           <button className="flex items-center gap-1 bg-blue-700 text-white text-sm px-3 py-2 rounded-md">
@@ -69,6 +72,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     fetchComments: id => dispatch(fetchComments(id)),
+    deletePost: id => dispatch(deletePost(id)),
   };
 };
 

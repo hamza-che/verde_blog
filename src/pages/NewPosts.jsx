@@ -12,7 +12,7 @@ const NewPosts = () => {
     e.preventDefault();
     axios
       .post("https://jsonplaceholder.typicode.com/posts", newPost)
-      .then(response => console.log(response))
+      .then(response => console.log(response.data))
       .catch(error => console.log(error));
   };
 
@@ -28,17 +28,17 @@ const NewPosts = () => {
             name="title"
             placeholder="Title"
             className="w-full block border border-gray-300 outline-0 h-8 p-1 rounded-sm"
-            onChange={changeHandler}
+            onChange={e => changeHandler(e)}
           />
         </div>
         <div className="flex gap-6 items-center justify-center mx-auto my-4 lg:w-3/4 ">
           <label htmlFor="body">Body</label>
           <textarea
-            placeholder="Body"
             id="body"
             name="body"
+            placeholder="Body"
             className="w-full border border-gray-300 outline-0 p-1 h-64 inline rounded-sm"
-            onChange={changeHandler}
+            onChange={e => changeHandler(e)}
           />
         </div>
         <button
