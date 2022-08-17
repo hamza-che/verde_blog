@@ -4,6 +4,8 @@ import {
   FETCH_POSTS_FAILURE,
   DELETE_POSTS_REQUEST,
   DELETE_POSTS_SUCCESS,
+  POST_POSTS_SUCCESS,
+  POST_POSTS_FAILURE,
 } from "./postTypes";
 
 const initialState = {
@@ -48,6 +50,20 @@ const postReducer = (state = initialState, action) => {
         loading: false,
         posts: state.posts.filter(post => post.id == action.payload),
         postsNumber: state.postsNumber - 1,
+        error: "",
+      };
+    case POST_POSTS_SUCCESS:
+      return {
+        loading: false,
+        posts: [ ...state.posts, action.payload ],
+        postsNumber: state.postsNumber + 1,
+        error: "",
+      };
+    case POST_POSTS_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
       };
     default:
       return state;

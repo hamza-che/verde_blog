@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { connect } from "react-redux";
+import { postPost } from "../redux";
 
-const NewPosts = () => {
+const NewPosts = ({ postPost }) => {
   const [ newPost, setNewPost ] = useState({});
 
   const changeHandler = e => {
@@ -10,10 +12,7 @@ const NewPosts = () => {
 
   const addPost = e => {
     e.preventDefault();
-    axios
-      .post("https://jsonplaceholder.typicode.com/posts", newPost)
-      .then(response => console.log(response.data))
-      .catch(error => console.log(error));
+    postPost(newPost);
   };
 
   return (
@@ -52,4 +51,10 @@ const NewPosts = () => {
   );
 };
 
-export default NewPosts;
+const mapDispatchToProps = dispatch => {
+  return {
+    postPost: post => dispatch(postPost(post)),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(NewPosts);

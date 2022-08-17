@@ -5,6 +5,12 @@ import {
   FETCH_POSTS_FAILURE,
   DELETE_POSTS_SUCCESS,
   DELETE_POSTS_REQUEST,
+  POST_POSTS_REQUEST,
+  POST_POSTS_SUCCESS,
+  POST_POSTS_FAILURE,
+  UPDATE_POSTS_REQUEST,
+  UPDATE_POSTS_SUCCESS,
+  UPDATE_POSTS_FAILURE,
 } from "./postTypes";
 
 export const fetchPostsRequest = () => {
@@ -43,6 +49,44 @@ export const fetchPosts = () => {
   };
 };
 
+// Post Posts
+export const postPostRequest = () => {
+  return {
+    type: POST_POSTS_REQUEST,
+  };
+};
+
+export const postPostSuccess = post => {
+  return {
+    type: POST_POSTS_SUCCESS,
+    payload: post,
+  };
+};
+
+export const postPostsFailure = error => {
+  return {
+    type: POST_POSTS_FAILURE,
+    payload: error,
+  };
+};
+
+export const postPost = post => {
+  return dispatch => {
+    dispatch(postPostRequest());
+    axios
+      .post("https://jsonplaceholder.typicode.com/posts/", post)
+      .then(response => {
+        dispatch(postPostSuccess(post));
+        console.log(response);
+      })
+      .catch(error => {
+        postPostsFailure(error);
+        console.log(error);
+      });
+  };
+};
+
+// Delete Posts
 export const deletePostRequest = () => {
   return {
     type: DELETE_POSTS_REQUEST,
