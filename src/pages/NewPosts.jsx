@@ -16,7 +16,7 @@ const NewPosts = ({ postPost }) => {
   };
 
   return (
-    <main className="text-center">
+    <main className="text-center bg-white p-5">
       <h1 className="mb-6 text-2xl font-bold">Create a new post</h1>
       <form onSubmit={addPost}>
         <div className="flex gap-6 items-center justify-center my-4 mx-auto lg:w-3/4 ">

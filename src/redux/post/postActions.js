@@ -86,6 +86,45 @@ export const postPost = post => {
   };
 };
 
+// Update Posts
+export const updatePostRequest = () => {
+  return {
+    type: UPDATE_POSTS_REQUEST,
+  };
+};
+
+export const updatePostSuccess = post => {
+  return {
+    type: UPDATE_POSTS_SUCCESS,
+    payload: post,
+  };
+};
+
+export const updatePostsFailure = error => {
+  return {
+    type: UPDATE_POSTS_FAILURE,
+    payload: error,
+  };
+};
+
+export const updatePost = updatedPost => {
+  return dispatch => {
+    dispatch(updatePostRequest());
+    axios
+      .put(
+        `https://jsonplaceholder.typicode.com/posts/${updatedPost.id}`,
+        updatedPost
+      )
+      .then(response => {
+        dispatch(updatePostSuccess(response.data));
+      })
+      .catch(error => {
+        updatePostsFailure(error);
+        console.log(error);
+      });
+  };
+};
+
 // Delete Posts
 export const deletePostRequest = () => {
   return {

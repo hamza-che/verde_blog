@@ -9,14 +9,14 @@ import Avatar from "../assets/images/avatar.jpg";
 
 const Header = ({ postsData }) => {
   return (
-    <header className="flex justify-between items-center p-6 bg-white">
+    <header className="flex justify-between items-center p-6 mb-3 bg-white">
       <Link to="/" className="font-bold text-gray-900 text-xl">
         Arbrit Blog
       </Link>
       <ul className="flex items-center gap-7 text-gray-600 font-bold">
         <li className="relative cursor-pointer">
           Posts{" "}
-          <span className="absolute -top-7 -right-2 p-1 text-green-600 bg-green-100 rounded-full text-sm">
+          <span className="absolute -top-6 -right-2 h-fit w-fit p-1 flex items-center justify-center text-green-600 bg-green-100 rounded-full text-sm">
             {postsData && postsData.postsNumber ? postsData.postsNumber : "0"}
           </span>
         </li>
