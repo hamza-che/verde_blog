@@ -1,8 +1,17 @@
 import React from "react";
+import Button from "./Button";
 
-const Form = ({ titleValue, bodyValue, onTitleChange, onBodyChange }) => {
+const Form = ({
+  titleValue,
+  bodyValue,
+  onTitleChange,
+  onBodyChange,
+  onSubmit,
+  isButton,
+  buttonBgColor,
+}) => {
   return (
-    <form>
+    <form onSubmit={onSubmit}>
       <div className="flex gap-6 items-center justify-center my-4 mx-auto lg:w-3/4 ">
         <label htmlFor="title">Title</label>
         <input
@@ -26,6 +35,11 @@ const Form = ({ titleValue, bodyValue, onTitleChange, onBodyChange }) => {
           onChange={onBodyChange}
         />
       </div>
+      {isButton ? (
+        <Button bgColor={buttonBgColor} type="submit">
+          Submit
+        </Button>
+      ) : null}
     </form>
   );
 };
