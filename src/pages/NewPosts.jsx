@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { connect } from "react-redux";
 import { postPost } from "../redux";
-import Button from "../components/Button";
+import Form from "../components/Form";
 
 const NewPosts = ({ postPost }) => {
   const [ newPost, setNewPost ] = useState({});
